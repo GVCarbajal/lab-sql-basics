@@ -149,8 +149,6 @@ group by account_id;
 /* Continuing with the previous example, rank the top 10 account_ids based on their difference. */
 
 select account_id,
-floor(sum(if(type = 'PRIJEM', amount, 0))) as incoming,
-floor(sum(if(type = 'VYDAJ', amount, 0))) as outgoing,
 (floor(sum(if(type = 'PRIJEM', amount, 0))) - floor(sum(if(type = 'VYDAJ', amount, 0)))) as difference
 from trans 
 group by account_id
