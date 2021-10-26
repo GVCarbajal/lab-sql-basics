@@ -146,6 +146,15 @@ from trans
 where account_id = 396 
 group by account_id;
 
+-- Using case/when statement: aproximately 1 s (Felipe's solution)
+select account_id,
+round(sum(case when type = 'vydaj' then amount else 0 end)) as outgoing,
+round(sum(case when type = 'prijem' then amount else 0 end)) as incoming,
+round(sum(case when type = 'vydaj' then amount else 0 end)) - round(sum(case when type = 'prijem' then amount else 0 end)) as balance
+from bank.trans
+where account_id = 396;
+
+
 /* Continuing with the previous example, rank the top 10 account_ids based on their difference. */
 
 select account_id,
